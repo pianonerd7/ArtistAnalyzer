@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class CSVReader {
 
@@ -16,8 +17,10 @@ public class CSVReader {
 			String curLine = reader.readLine();
 			while (curLine != null) {
 				populateMap(curLine, curRow);
+				curLine = reader.readLine();
 				curRow++;
-			}	
+			}
+			printMap();
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -41,6 +44,12 @@ public class CSVReader {
 				newSet.add(curRow);
 				artistIndex.put(artist, newSet);
 			}
+		}
+	}
+	
+	private void printMap() {
+		for (Map.Entry<String, HashSet<Integer>> entry : artistIndex.entrySet()) {
+			System.out.println(entry.getKey() + ": " + entry.getValue().toString());
 		}
 	}
 }
