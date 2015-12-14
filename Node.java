@@ -1,24 +1,24 @@
 
 public class Node {
 
-	private int firstIndex;
-	private int secondIndex;
+	private int row;
+	private int column;
 	
 	public Node (int firstIndex, int secondIndex) {
-		this.firstIndex = firstIndex;
-		this.secondIndex = secondIndex;
+		this.row = firstIndex;
+		this.column = secondIndex;
 	}
 	
 	public int getFirstIndex() {
-		return firstIndex;
+		return row;
 	}
 	
 	public int getSecondIndex() {
-		return secondIndex;
+		return column;
 	}
 	
 	@Override
 	public String toString() {
-		return "firstIndex: " + firstIndex + "secondIndex: " + secondIndex;
+		return "(firstIndex: " + row + ", secondIndex: " + column + ")";
 	}
 }
