@@ -25,11 +25,11 @@ public class CSVReader {
     curLine = reader.readLine();
     curRow++;
    }
-   printMap();
+   printMap(artistIndex);
    System.out.println("\n\n\n\n ******* \n\n\n\n");
-   filterMap(1);
+   filterMap(3);
    System.out.println("\n\n\n\n ******* \n\n\n\n");
-   printMap();
+   printMap(artistIndex);
   }
   catch (Exception e) {
    System.out.println(e.getMessage());
@@ -61,12 +61,17 @@ public class CSVReader {
  private void filterMap(int minimum) {
   
   Set<String> keys = artistIndex.keySet();
+  HashMap<String, HashSet<Node>> newIndex = new HashMap<String, HashSet<Node>>();
   
   for (String artist : keys) {
-   if (artistIndex.get(artist).size() < minimum) {
-    artistIndex.remove(artist);
+   if (artistIndex.get(artist).size() >= minimum) {
+    newIndex.put(artist, artistIndex.get(artist));
    }
   }
+  
+  System.out.println("New Index Map");
+  printMap(newIndex);
+  artistIndex = newIndex;
   
   /*for (Map.Entry<String, HashSet<Node>> entry : artistIndex.entrySet()) {
     if (entry.getValue().size() < minimum) {
@@ -76,8 +81,8 @@ public class CSVReader {
   }*/
  }
  
- private void printMap() {
-  for (Map.Entry<String, HashSet<Node>> entry : artistIndex.entrySet()) {
+ private void printMap(HashMap<String, HashSet<Node>> map) {
+  for (Map.Entry<String, HashSet<Node>> entry : map.entrySet()) {
    System.out.println(entry.getKey() + ": " + entry.getValue().toString());
   }
  }
