@@ -10,11 +10,7 @@ public class CSVReader {
 
  HashMap<String, HashSet<Node>> artistIndex = new HashMap<String, HashSet<Node>>();
  
- public HashMap<String, HashSet<Node>> getMap() {
-   return artistIndex;
- }
- 
- public void scanner(String fileName) throws IOException {
+ public void scanner(String fileName, int minOccurance) throws IOException {
   
   BufferedReader reader = new BufferedReader(new FileReader(fileName));
   int curRow = 1;
@@ -25,10 +21,7 @@ public class CSVReader {
     curLine = reader.readLine();
     curRow++;
    }
-   printMap(artistIndex);
-   System.out.println("\n\n\n\n ******* \n\n\n\n");
-   filterMap(3);
-   System.out.println("\n\n\n\n ******* \n\n\n\n");
+   filterMap(minOccurance);
    printMap(artistIndex);
   }
   catch (Exception e) {
@@ -60,7 +53,7 @@ public class CSVReader {
  
  private void filterMap(int minimum) {
   
-  Set<String> keys = artistIndex.keySet();
+  Stirng[] keys = artistIndex.keySet();
   HashMap<String, HashSet<Node>> newIndex = new HashMap<String, HashSet<Node>>();
   
   for (String artist : keys) {
@@ -69,16 +62,19 @@ public class CSVReader {
    }
   }
   
-  System.out.println("New Index Map");
-  printMap(newIndex);
   artistIndex = newIndex;
-  
-  /*for (Map.Entry<String, HashSet<Node>> entry : artistIndex.entrySet()) {
-    if (entry.getValue().size() < minimum) {
-    //System.out.println(entry.getKey());
-    artistIndex.remove(entry.getKey());
-   }
-  }*/
+ }
+ 
+ private void pairArtists() {
+	 
+	 String[] keys = artistIndex.keySet().toArray(new String[0]);
+	 
+	 for (int indexi = 0; indexi < keys.length; indexi++) {
+		 for (int indexj = indexi; indexj < keys.length; indexj++) {
+			 
+		 }
+	 }
+	 
  }
  
  private void printMap(HashMap<String, HashSet<Node>> map) {
@@ -90,6 +86,6 @@ public class CSVReader {
  public static void main (String[] args) throws IOException {
   CSVReader reader = new CSVReader();
   
-  reader.scanner("SmallData.csv");
+  reader.scanner("SmallData.csv", 3);
  }
 }
