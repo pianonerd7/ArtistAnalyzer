@@ -45,8 +45,8 @@ public class CSVReader {
     temp.add(new Node(curRow, column));
    }
    else {
-    HashSet<Integer> newSet = new HashSet<Integer>();
-    newSet.add(curRow);
+    HashSet<Node> newSet = new HashSet<Node>();
+    newSet.add(new Node(curRow, column));
     artistIndex.put(artist, newSet);
    }
    column++;
@@ -54,7 +54,7 @@ public class CSVReader {
  }
  
  private void filterMap(int minimum) {
-  for (Map.Entry<String, HashSet<Integer>> entry : artistIndex.entrySet()) {
+  for (Map.Entry<String, HashSet<Node>> entry : artistIndex.entrySet()) {
     if (entry.getValue().size() < minimum) {
     //System.out.println(entry.getKey());
     System.out.println(artistIndex.remove(entry.getKey()));
@@ -63,7 +63,7 @@ public class CSVReader {
  }
  
  private void printMap() {
-  for (Map.Entry<String, HashSet<Integer>> entry : artistIndex.entrySet()) {
+  for (Map.Entry<String, HashSet<Node>> entry : artistIndex.entrySet()) {
    System.out.println(entry.getKey() + ": " + entry.getValue().toString());
   }
  }
