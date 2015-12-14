@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class CSVReader {
 
  HashMap<String, HashSet<Node>> artistIndex = new HashMap<String, HashSet<Node>>();
+ 
+ public HashMap<String, HashSet<Node>> getMap() {
+   return artistIndex;
+ }
  
  public void scanner(String fileName) throws IOException {
   
@@ -22,7 +27,7 @@ public class CSVReader {
    }
    printMap();
    System.out.println("\n\n\n\n ******* \n\n\n\n");
-   filterMap(2);
+   filterMap(1);
    System.out.println("\n\n\n\n ******* \n\n\n\n");
    printMap();
   }
@@ -54,12 +59,21 @@ public class CSVReader {
  }
  
  private void filterMap(int minimum) {
-  for (Map.Entry<String, HashSet<Node>> entry : artistIndex.entrySet()) {
-    if (entry.getValue().size() < minimum) {
-    //System.out.println(entry.getKey());
-    System.out.println(artistIndex.remove(entry.getKey()));
+  
+  Set<String> keys = artistIndex.keySet();
+  
+  for (String artist : keys) {
+   if (artistIndex.get(artist).size() < minimum) {
+    artistIndex.remove(artist);
    }
   }
+  
+  /*for (Map.Entry<String, HashSet<Node>> entry : artistIndex.entrySet()) {
+    if (entry.getValue().size() < minimum) {
+    //System.out.println(entry.getKey());
+    artistIndex.remove(entry.getKey());
+   }
+  }*/
  }
  
  private void printMap() {
