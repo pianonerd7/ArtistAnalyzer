@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class CSVReader {
 
- HashMap<String, HashSet<Integer>> artistIndex = new HashMap<String, HashSet<Integer>>();
+ HashMap<String, HashSet<Node>> artistIndex = new HashMap<String, HashSet<Node>>();
  
  public void scanner(String fileName) throws IOException {
   
@@ -37,17 +37,19 @@ public class CSVReader {
  private void populateMap(String curLine, int curRow) {
   String[] artists = curLine.split(",");
   
+  int column = 1;
   for (String artist : artists) {
-   HashSet<Integer> temp = artistIndex.get(artist);
+   HashSet<Node> temp = artistIndex.get(artist);
    
    if (temp != null) {
-    temp.add(curRow);
+    temp.add(new Node(curRow, column));
    }
    else {
     HashSet<Integer> newSet = new HashSet<Integer>();
     newSet.add(curRow);
     artistIndex.put(artist, newSet);
    }
+   column++;
   }
  }
  
