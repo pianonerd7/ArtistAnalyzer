@@ -53,28 +53,26 @@ public class CSVReader {
  
  private void filterMap(int minimum) {
   
-  Stirng[] keys = artistIndex.keySet();
-  HashMap<String, HashSet<Node>> newIndex = new HashMap<String, HashSet<Node>>();
+  String[] keys = artistIndex.keySet().toArray(new String[0]);
   
   for (String artist : keys) {
-   if (artistIndex.get(artist).size() >= minimum) {
-    newIndex.put(artist, artistIndex.get(artist));
+   if (artistIndex.get(artist).size() < minimum) {
+    artistIndex.remove(artist);
    }
   }
   
-  artistIndex = newIndex;
  }
  
  private void pairArtists() {
-	 
-	 String[] keys = artistIndex.keySet().toArray(new String[0]);
-	 
-	 for (int indexi = 0; indexi < keys.length; indexi++) {
-		 for (int indexj = indexi; indexj < keys.length; indexj++) {
-			 
-		 }
-	 }
-	 
+  
+  String[] keys = artistIndex.keySet().toArray(new String[0]);
+  
+  for (int indexi = 0; indexi < keys.length; indexi++) {
+   for (int indexj = indexi; indexj < keys.length; indexj++) {
+    
+   }
+  }
+  
  }
  
  private void printMap(HashMap<String, HashSet<Node>> map) {
