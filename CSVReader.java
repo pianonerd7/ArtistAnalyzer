@@ -23,6 +23,7 @@ public class CSVReader {
    }
    filterMap(minOccurance);
    printMap(artistIndex);
+   pairArtists(minOccurance);
   }
   catch (Exception e) {
    System.out.println(e.getMessage());
@@ -63,13 +64,19 @@ public class CSVReader {
   
  }
  
- private void pairArtists() {
+ private void pairArtists(int minOccurance) {
   
   String[] keys = artistIndex.keySet().toArray(new String[0]);
   
   for (int indexi = 0; indexi < keys.length; indexi++) {
    for (int indexj = indexi; indexj < keys.length; indexj++) {
     
+	   HashSet<Node> temp = artistIndex.get(keys[indexi]);
+	   temp.retainAll(artistIndex.get(keys[indexj]));
+	   
+	   if (temp.size() > minOccurance) {
+		   
+	   }
    }
   }
   
