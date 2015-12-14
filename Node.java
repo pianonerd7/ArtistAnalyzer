@@ -16,4 +16,9 @@ public class Node {
 	public int getSecondIndex() {
 		return secondIndex;
 	}
+	
+	@Override
+	public String toString() {
+		return "firstIndex: " + firstIndex + "secondIndex: " + secondIndex;
+	}
 }
