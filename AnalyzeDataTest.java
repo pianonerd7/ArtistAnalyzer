@@ -69,8 +69,6 @@ public class AnalyzeDataTest {
 		analyze.setArtistIndex(artistIndex);
 		analyze.pairArtists(2);
 
-		System.out.println(results);
-		System.out.println(analyze.getQualifiedPairs());
 		Assert.assertEquals("The qualified pairs of artists and the expected are not the same.", results,
 				analyze.getQualifiedPairs());
 
