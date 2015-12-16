@@ -39,7 +39,6 @@ public class AnalyzeData {
 				artistIndex.remove(artist);
 			}
 		}
-
 	}
 
 	private void pairArtists(int minOccurance) {
@@ -75,8 +74,7 @@ public class AnalyzeData {
 	}
 
 	public static void main(String[] args) throws IOException {
-		CSVReader reader = new CSVReader();
-
-		reader.scanner("SmallData.csv", 2);
+		AnalyzeData ad = new AnalyzeData("SmallData.csv", 2);
+		ad.analyzeData();
 	}
 }
