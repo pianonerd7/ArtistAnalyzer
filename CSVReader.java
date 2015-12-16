@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -8,10 +10,11 @@ public class CSVReader {
 
 	private static HashMap<String, HashSet<CoordinateNode>> artistIndex = new HashMap<String, HashSet<CoordinateNode>>();
 
-	public static HashMap<String, HashSet<CoordinateNode>> scanner(String fileName, int minOccurance)
+	public static HashMap<String, HashSet<CoordinateNode>> scanner(String filePath, int minOccurance)
 			throws IOException {
 
-		BufferedReader reader = new BufferedReader(new FileReader(fileName));
+		File fileDirectory = new File(filePath);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileDirectory), "UTF8"));
 		int curRow = 1;
 		try {
 			String curLine = reader.readLine();
