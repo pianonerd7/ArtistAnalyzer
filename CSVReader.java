@@ -20,9 +20,6 @@ public class CSVReader {
 				curLine = reader.readLine();
 				curRow++;
 			}
-			// filterMap(minOccurance);
-			// printMap(artistIndex);
-			// pairArtists(minOccurance);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
