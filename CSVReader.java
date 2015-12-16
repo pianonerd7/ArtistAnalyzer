@@ -8,8 +8,11 @@ import java.util.Map;
 
 public class CSVReader {
 
- private HashMap<String, HashSet<CoordinateNode>> artistIndex = new HashMap<String, HashSet<CoordinateNode>>();
- private ArrayList<ArtistNode> qualifiedPairs = new ArrayList<ArtistNode>();
+ private HashMap<String, HashSet<CoordinateNode>> artistIndex;
+ 
+ public CSVReader() {
+	 artistIndex = new HashMap<String, HashSet<CoordinateNode>>();
+ }
  
  public void scanner(String fileName, int minOccurance) throws IOException {
   
