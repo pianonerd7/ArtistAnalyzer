@@ -1,14 +1,15 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class CSVReader {
 
- HashMap<String, HashSet<Node>> artistIndex = new HashMap<String, HashSet<Node>>();
+ private HashMap<String, HashSet<CoordinateNode>> artistIndex = new HashMap<String, HashSet<CoordinateNode>>();
+ private ArrayList<ArtistNode> qualifiedPairs = new ArrayList<ArtistNode>();
  
  public void scanner(String fileName, int minOccurance) throws IOException {
   
@@ -22,7 +23,7 @@ public class CSVReader {
     curRow++;
    }
    filterMap(minOccurance);
-   printMap(artistIndex);
+   //printMap(artistIndex);
    pairArtists(minOccurance);
   }
   catch (Exception e) {
@@ -38,14 +39,14 @@ public class CSVReader {
   
   int column = 1;
   for (String artist : artists) {
-   HashSet<Node> temp = artistIndex.get(artist);
+   HashSet<CoordinateNode> temp = artistIndex.get(artist);
    
    if (temp != null) {
-    temp.add(new Node(curRow, column));
+    temp.add(new CoordinateNode(curRow, column));
    }
    else {
-    HashSet<Node> newSet = new HashSet<Node>();
-    newSet.add(new Node(curRow, column));
+    HashSet<CoordinateNode> newSet = new HashSet<CoordinateNode>();
+    newSet.add(new CoordinateNode(curRow, column));
     artistIndex.put(artist, newSet);
    }
    column++;
@@ -69,28 +70,36 @@ public class CSVReader {
   String[] keys = artistIndex.keySet().toArray(new String[0]);
   
   for (int indexi = 0; indexi < keys.length; indexi++) {
-   for (int indexj = indexi; indexj < keys.length; indexj++) {
+   for (int indexj = indexi+1; indexj < keys.length; indexj++) {
     
-	   HashSet<Node> temp = artistIndex.get(keys[indexi]);
-	   temp.retainAll(artistIndex.get(keys[indexj]));
-	   
-	   if (temp.size() > minOccurance) {
-		   
-	   }
+    HashSet<CoordinateNode> temp = artistIndex.get(keys[indexj]);
+    temp.retainAll(artistIndex.get(keys[indexj]));
+    
+    if (temp.size() > minOccurance) {
+     qualifiedPairs.add(new ArtistNode(keys[indexi], keys[indexj]));
+    }
    }
   }
-  
+  System.out.println("pair artists");
+  printPairs(qualifiedPairs);
  }
  
- private void printMap(HashMap<String, HashSet<Node>> map) {
-  for (Map.Entry<String, HashSet<Node>> entry : map.entrySet()) {
+ private void printMap(HashMap<String, HashSet<CoordinateNode>> map) {
+  for (Map.Entry<String, HashSet<CoordinateNode>> entry : map.entrySet()) {
    System.out.println(entry.getKey() + ": " + entry.getValue().toString());
+  }
+ }
+ 
+ private void printPairs(ArrayList<ArtistNode> pairs) {
+  System.out.println(pairs.size());
+  for (ArtistNode pair : pairs)  {
+   System.out.println(pair);
   }
  }
  
  public static void main (String[] args) throws IOException {
   CSVReader reader = new CSVReader();
   
-  reader.scanner("SmallData.csv", 3);
+  reader.scanner("SmallData.csv", 2);
  }
 }
