@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 public class CSVUtility {
 
-	private static HashMap<String, HashSet<CoordinateNode>> artistIndex = new HashMap<String, HashSet<CoordinateNode>>();
+	private static HashMap<String, HashSet<Integer>> artistIndex = new HashMap<String, HashSet<Integer>>();
 
 	/**
 	 * Scans input file, and reads row by row into artistIndex
@@ -24,7 +24,7 @@ public class CSVUtility {
 	 * @throws IOException
 	 *             Error during file reading and handling
 	 */
-	public static HashMap<String, HashSet<CoordinateNode>> scanner(String filePath) throws Exception {
+	public static HashMap<String, HashSet<Integer>> scanner(String filePath) throws Exception {
 
 		File fileDirectory = new File(filePath);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileDirectory), "UTF8"));
@@ -51,18 +51,16 @@ public class CSVUtility {
 	private static void populateMap(String curLine, int curRow) {
 		String[] artists = curLine.split(",");
 
-		int column = 1;
 		for (String artist : artists) {
-			HashSet<CoordinateNode> temp = artistIndex.get(artist);
+			HashSet<Integer> temp = artistIndex.get(artist);
 
 			if (temp != null) {
-				temp.add(new CoordinateNode(curRow, column));
+				temp.add(curRow);
 			} else {
-				HashSet<CoordinateNode> newSet = new HashSet<CoordinateNode>();
-				newSet.add(new CoordinateNode(curRow, column));
+				HashSet<Integer> newSet = new HashSet<Integer>();
+				newSet.add(curRow);
 				artistIndex.put(artist, newSet);
 			}
-			column++;
 		}
 	}
 
